@@ -1,5 +1,7 @@
 package cr.ac.itcr.shopadvisor;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -12,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -51,6 +54,16 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
     }
 
+
+    public void aceptar() {
+        Toast t=Toast.makeText(this,"Bienvenido a probar el programa.", Toast.LENGTH_SHORT);
+        t.show();
+    }
+
+    public void cancelar() {
+        finish();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d("Method", "onCreate");
@@ -68,8 +81,64 @@ public class MainActivity extends AppCompatActivity {
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 btn.setText("Successful");
+
+                /*Simple
+               /* AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                builder.setTitle("Importante");
+                builder.setMessage("Este es un programa solo de prueba y no la versión completa");
+                builder.setPositiveButton("OK",null);
+                builder.create();
+                builder.show();*/
+
+
+
+                AlertDialog.Builder dialogo1 = new AlertDialog.Builder(getApplicationContext());
+                dialogo1.setTitle("Importante");
+                dialogo1.setMessage("¿ Acepta la ejecución de este programa en modo prueba ?");
+                dialogo1.setCancelable(false);
+                dialogo1.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        aceptar();
+                    }
+                });
+                dialogo1.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialogo1, int id) {
+                        cancelar();
+                    }
+                });
+                dialogo1.show();
+
+
+
+
+                Toast toastS = Toast.makeText(getApplicationContext(), "Mensaje corto",
+                        Toast.LENGTH_SHORT);
+                toastS.show();
+
+
+
+
+
+                Toast toastL = Toast.makeText(getApplicationContext(), "Mensaje largo",
+                        Toast.LENGTH_SHORT);
+                toastL.show();
             }
         });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
